@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Transform _foot;
-
     [SerializeField] private bool _canMove = false;
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _jumpForce = 10f;
@@ -27,7 +26,9 @@ public class Player : MonoBehaviour
         _grounded = GroundCheck();
         Movement();
         OnLand();
-        Jump();
+
+        if (Input.GetButtonDown("Jump") && _grounded)
+            Jump(_jumpForce);
     }
     
     private void Movement()
@@ -44,20 +45,25 @@ public class Player : MonoBehaviour
         _anim.Walk(_rigid.velocity.x);
     }
 
-    private void Jump()
-    {
-        if (Input.GetButtonDown("Jump") && _grounded)
-        {
-            _rigid.velocity = new Vector2(_rigid.velocity.x, _jumpForce);
-            
-        }
-
+    private void Jump(float jumpForce)
+    {        
+        _rigid.velocity = new Vector2(_rigid.velocity.x, jumpForce);
         _anim.Jump(!_grounded);
     }
 
     private bool GroundCheck()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, _layerMask);
+
+        if (hit.collider != null)
+        {
+            if (hit.collider.CompareTag("Spring"))
+            {
+                Jump(_jumpForce * 2f);  
+                return false;             
+            }            
+        }        
+
         return (hit.collider != null);
     }
 
