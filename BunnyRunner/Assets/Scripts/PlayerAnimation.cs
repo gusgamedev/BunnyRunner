@@ -29,6 +29,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void Jump(bool isJumping)
     {
+        Debug.Log(isJumping);
         _bunnyAnim.SetBool("Jumping", isJumping);
     }
 

@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D _rigid;
     private PlayerAnimation _anim;
-    private bool _grounded = false;
+    [SerializeField] private bool _grounded = false;
 
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Transform _foot;
@@ -24,11 +24,14 @@ public class Player : MonoBehaviour
     private void Update()
     {
         _grounded = GroundCheck();
+
         Movement();
+
         OnLand();
 
         if (Input.GetButtonDown("Jump") && _grounded)
             Jump(_jumpForce);
+        _anim.Jump(!_grounded);
     }
     
     private void Movement()
@@ -46,31 +49,32 @@ public class Player : MonoBehaviour
     }
 
     private void Jump(float jumpForce)
-    {        
+    {   
         _rigid.velocity = new Vector2(_rigid.velocity.x, jumpForce);
-        _anim.Jump(!_grounded);
+        //_anim.Jump(!_grounded);
+
     }
 
     private bool GroundCheck()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, _layerMask);
-
-        if (hit.collider != null)
-        {
-            if (hit.collider.CompareTag("Spring"))
-            {
-                Jump(_jumpForce * 2f);  
-                return false;             
-            }            
-        }        
-
+        
         return (hit.collider != null);
     }
 
     void OnLand()
     {
-        if (_rigid.velocity.y < 0 && _grounded)
-            _anim.Dust(_foot);
+        if (_rigid.velocity.y < -0.01f && _grounded)
+            _anim.Dust(_foot);        
+    }
+
+    public void SpringJump()
+    {
+        if (_rigid.velocity.y < 0)
+        {
+            //_anim.Dust(_foot);
+            Jump(_jumpForce * 2f);
+        }
     }
 
     
