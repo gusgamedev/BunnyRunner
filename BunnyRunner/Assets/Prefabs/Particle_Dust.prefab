@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 19728594983792492}
   - component: {fileID: 8937178915240551270}
   m_Layer: 0
-  m_Name: Dust
+  m_Name: Particle_Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4727,8 +4727,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -173641603
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0

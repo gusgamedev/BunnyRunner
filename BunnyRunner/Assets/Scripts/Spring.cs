@@ -16,7 +16,7 @@ public class Spring : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.GetComponent<Player>().SpringJump();
-            _anim.SetTrigger("Jump");            
+            _anim.SetTrigger("Activate");            
         }
     }
 

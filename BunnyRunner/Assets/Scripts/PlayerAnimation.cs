@@ -34,11 +34,13 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     public void Dust(Transform foot)
-    {
+    {  
         Instantiate(_dust, foot.position, Quaternion.identity);
     }
 
     public void Fly(bool isFlying) {
         _bunnyAnim.SetBool("Flying", isFlying);
     } 
+
+    
 }

@@ -6,10 +6,13 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D _rigid;
     private PlayerAnimation _anim;
-    [SerializeField] private bool _grounded = false;
+    private bool _grounded = false;
+    private bool _wasJumping = false;
+    [SerializeField] private bool _canFly = false;
 
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Transform _foot;
+    [SerializeField] private float _radius;
     [SerializeField] private bool _canMove = false;
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _jumpForce = 10f;
@@ -27,11 +30,17 @@ public class Player : MonoBehaviour
 
         Movement();
 
-        OnLand();
-
-        if (Input.GetButtonDown("Jump") && _grounded)
+        if (Input.GetButtonDown("Jump") && _canFly)
+            Fly();
+        else if (Input.GetButtonDown("Jump") && _grounded)
             Jump(_jumpForce);
+
         _anim.Jump(!_grounded);
+        
+        if (!_grounded)
+          _wasJumping = true;
+
+        OnLand();
     }
     
     private void Movement()
@@ -51,31 +60,44 @@ public class Player : MonoBehaviour
     private void Jump(float jumpForce)
     {   
         _rigid.velocity = new Vector2(_rigid.velocity.x, jumpForce);
-        //_anim.Jump(!_grounded);
+        
+    }
 
+    private void Fly()
+    {   
+        Jump(_jumpForce/1.5f);
     }
 
     private bool GroundCheck()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, _layerMask);
-        
-        return (hit.collider != null);
+        return Physics2D.OverlapCircle(_foot.position, _radius, _layerMask);
     }
 
     void OnLand()
     {
-        if (_rigid.velocity.y < -0.01f && _grounded)
-            _anim.Dust(_foot);        
+        if (_wasJumping && _grounded)
+        {
+            _wasJumping = false;
+            _anim.Dust(_foot);
+        }
     }
 
     public void SpringJump()
     {
         if (_rigid.velocity.y < 0)
-        {
-            //_anim.Dust(_foot);
-            Jump(_jumpForce * 2f);
-        }
+            Jump(_jumpForce * 1.75f);
     }
 
-    
+    void CancelFly()
+    {
+        _canFly = false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(_foot.position, _radius);
+    }
+
+
 }
