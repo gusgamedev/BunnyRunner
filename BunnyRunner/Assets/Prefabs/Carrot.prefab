@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6271546351383000650}
   - component: {fileID: 6271546351383000649}
   - component: {fileID: 7083617553408843839}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Carrot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.10178709, y: -0.06222421}
+  m_Offset: {x: 0.03702259, y: -0.027350962}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4753685, y: 0.5046123}
+  m_Size: {x: 1.1230183, y: 1.1124066}
   m_EdgeRadius: 0
 --- !u!114 &7083617553408843839
 MonoBehaviour:

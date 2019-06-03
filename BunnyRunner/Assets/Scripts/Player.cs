@@ -6,9 +6,13 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D _rigid;
     private PlayerAnimation _anim;
-    private bool _grounded = false;
+
     private bool _wasJumping = false;
+    private bool _grounded = false;
+
     [SerializeField] private bool _canFly = false;
+    [SerializeField] private GameObject _wings;
+    [SerializeField] private float _wingsDuration = 4f;
 
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Transform _foot;
@@ -22,6 +26,11 @@ public class Player : MonoBehaviour
     {
         _rigid = GetComponent<Rigidbody2D>();
         _anim = GetComponent<PlayerAnimation>();
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void Update()
@@ -59,13 +68,13 @@ public class Player : MonoBehaviour
 
     private void Jump(float jumpForce)
     {   
-        _rigid.velocity = new Vector2(_rigid.velocity.x, jumpForce);
-        
+        _rigid.velocity = new Vector2(_rigid.velocity.x, jumpForce);        
     }
 
     private void Fly()
     {   
         Jump(_jumpForce/1.5f);
+        _wings.GetComponent<AudioSource>().Play();
     }
 
     private bool GroundCheck()
@@ -82,15 +91,26 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SpringJump()
+    public void SpringJump(float jumpForceSpring)
     {
         if (_rigid.velocity.y < 0)
-            Jump(_jumpForce * 1.75f);
+        {
+            GetComponent<BetterJumping>().PauseBetterJump();
+            Jump(jumpForceSpring);
+        }
+    }
+
+    public void StartFly()
+    {
+        _canFly = true;
+        _wings.SetActive(true);
+        Invoke("CancelFly", _wingsDuration);
     }
 
     void CancelFly()
     {
         _canFly = false;
+        _wings.SetActive(false);
     }
 
     private void OnDrawGizmosSelected()
@@ -99,5 +119,21 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(_foot.position, _radius);
     }
 
+    void Die()
+    {
+        _canMove = false;
+        CancelFly();
+        _anim.Die();
+        GetComponent<BetterJumping>().PauseBetterJump();
+        Jump(15f);
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {   
+        if (_canMove)
+            if (collision.CompareTag("Die"))
+                Die();
+    }
 
 }

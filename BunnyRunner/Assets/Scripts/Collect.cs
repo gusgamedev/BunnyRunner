@@ -11,8 +11,16 @@ public class Collect : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Instantiate(_particle, transform.position, Quaternion.identity);
+
+            if (this.gameObject.CompareTag("Wings"))
+            {
+                collision.GetComponent<Player>().StartFly();
+            }
+
             Destroy(gameObject);
         }
+
+        
     }
 
     

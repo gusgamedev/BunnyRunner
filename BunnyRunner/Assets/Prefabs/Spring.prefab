@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5111535037976075879}
   - component: {fileID: 5111535037976075876}
   - component: {fileID: 5111535037976075877}
+  - component: {fileID: 5111535037976075883}
   m_Layer: 8
   m_Name: Spring
   m_TagString: Spring
@@ -113,7 +114,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.011542559, y: 0.86165327}
+  m_Offset: {x: 0.011542559, y: 0.55557513}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -124,5 +125,18 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4269147, y: 0.4305228}
+  m_Size: {x: 1.4269147, y: 1.0426791}
   m_EdgeRadius: 0
+--- !u!114 &5111535037976075883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5111535037976075882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0a8704ffcbcbc643b2140132001c2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpForce: 25

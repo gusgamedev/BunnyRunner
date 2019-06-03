@@ -90,9 +90,10 @@ GameObject:
   - component: {fileID: 6197061205945924285}
   - component: {fileID: 4898435335086231477}
   - component: {fileID: 2508093549084133501}
-  m_Layer: 0
+  - component: {fileID: 3149286470761366124}
+  m_Layer: 10
   m_Name: Wings
-  m_TagString: Untagged
+  m_TagString: Wings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,7 +105,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8515269085412967453}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.33, y: -0.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -158,6 +159,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2172834, y: 0.58243847}
   m_EdgeRadius: 0
+--- !u!114 &3149286470761366124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8515269085412967453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7729c8aaab6f344ab8dbd306e89874e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particle: {fileID: 19728594983792491, guid: 41982da10c440264ea8a26efdd66f8d9, type: 3}
 --- !u!1 &8543537339318214769
 GameObject:
   m_ObjectHideFlags: 0

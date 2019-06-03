@@ -10,7 +10,7 @@ public class FallingPlatform : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-            Invoke("Fall", 0.8f);
+            Invoke("Fall", 0.6f);
     }
 
     private void Update()

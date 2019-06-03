@@ -5,6 +5,7 @@ public class Spring : MonoBehaviour
 {
 
     private Animator _anim;
+    [SerializeField] private float _jumpForce = 20f;
 
 
     private void Start()
@@ -15,7 +16,7 @@ public class Spring : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<Player>().SpringJump();
+            collision.GetComponent<Player>().SpringJump(_jumpForce);
             _anim.SetTrigger("Activate");            
         }
     }

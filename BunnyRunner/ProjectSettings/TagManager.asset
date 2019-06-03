@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Spring
   - Ground
+  - Wings
+  - Die
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - 
   - Ground
   - Cam
-  - 
+  - Collectables
   - 
   - 
   - 
